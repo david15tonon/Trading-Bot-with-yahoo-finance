@@ -29,13 +29,17 @@ def backtest(data):
     return data
 
 def plot_results(data):
+    import matplotlib
+    matplotlib.use("Agg")  # backend non interactif
+    import matplotlib.pyplot as plt
+
     plt.figure(figsize=(12,6))
     plt.plot(data['Close'], label='Close Price')
     plt.plot(data['SMA20'], label='SMA20')
     plt.plot(data['SMA50'], label='SMA50')
     plt.legend()
     plt.title(f"Trading Strategy Demo on {TICKER}")
-    plt.show()
+    plt.savefig("strategy_plot.png")
 
 if __name__ == "__main__":
     df = download_data()
